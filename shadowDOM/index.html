@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-us">
+   <head>
+      <meta charset="utf-8"/>
+      <title>Shadow DOM example</title>
+      <!-- 
+      Example based on http://webcomponents.org/articles/introduction-to-shadow-dom/
+      Browser support http://caniuse.com/#search=shadow
+      -->
+   </head>
+   <body>
+      <template id="membership">
+         <style>
+            div {
+               background-color: #ddd;
+               border: 1px solid #ccc;
+               font-family: sans-serif;
+               padding: .15em;
+               width: 20em;
+            }
+            
+            img, span {
+               display: inline-block;
+               vertical-align: middle;
+            }
+
+            span {
+               font-size: 200%;
+            }
+         </style>
+         <div>
+            <img src="frontenders_ticino-logo_64.png">
+            <span>Proud member</span>
+            <content select="h1"></content>
+         </div>
+      </template>
+
+      <div id="component">
+         <h1>Elia Contini</h1>
+      </div>
+
+      <div>Another div</div>
+
+      <script>
+         var component = document.querySelector('#component');
+         // Create a Shadow Root
+         var root = component.createShadowRoot();
+         var template = document.querySelector('#membership');
+         // Copy the <template>
+         // https://developer.mozilla.org/en-US/docs/Web/API/document.importNode
+         var clone = document.importNode(template.content, true);
+         // Append template to the Shadow Root
+         root.appendChild(clone);
+      </script>
+   </body>
+</html>

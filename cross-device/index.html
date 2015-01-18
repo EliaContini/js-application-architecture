@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-us">
+   <head>
+      <meta charset="utf-8"/>
+      <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"/>
+      <title>Cross device example</title>
+      <style>
+         body {
+            background-color: #fff;
+            color: #000;
+            font-family: sans-serif;
+            font-size: 100%;
+         }
+      </style>
+   </head>
+   <body>
+      <!-- Dojo configuration and loading -->
+      <script>
+      var dojoConfig = {
+         "async": true,
+         // This code registers the correct location of the "demo"
+         // package so we can load Dojo from the CDN whilst still
+         // being able to load local modules
+         "packages": [
+            {
+               "name": "dijit",
+               "location": "//ajax.googleapis.com/ajax/libs/dojo/1.10.3/dijit"
+            },
+            {
+               "name": "app",
+               "location": location.pathname.replace(/\/[^/]*$/, '') + "/app"
+            }
+         ]
+      };
+      </script>
+      <script src="//ajax.googleapis.com/ajax/libs/dojo/1.10.3/dojo/dojo.js"></script>
+      <!-- DEMO STARTS HERE 
+         Based on http://dojo-toolkit.33424.n3.nabble.com/responsive-web-design-td4002675.html#a4002677
+      -->
+      <script>
+         require([
+            "dojo/has!touch?app/MobileUI:app/DesktopUI"
+            ],
+            function (UI) {
+               var ui = new UI();
+               ui.placeAt(document.body);
+               ui.startup();
+            }
+         );
+      </script>
+   </body>
+</html>

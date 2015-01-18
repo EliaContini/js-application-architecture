@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-us">
+   <head>
+      <meta charset="utf-8"/>
+      <title>Publish/Subscribe example</title>
+      <style>
+         body {
+            background-color: #fff;
+            color: #000;
+            font-family: sans-serif;
+            font-size: 100%;
+         }
+
+         .publisherContainer, .subscriberContainer {
+            display: inline-block;
+            margin: 0 1%;
+            padding: 1%;
+            outline: 1px solid #ddd;
+            vertical-align: top;
+            width: 45.5%;
+         }
+
+         .subscriber {
+            border: 1px solid #000;
+            margin: .25em;
+            min-height: 1.5em;
+         }
+      </style>
+   </head>
+   <body>
+      <div class="publisherContainer">
+         <h1>Publisher</h1>
+         <div id="publisher">
+            <input data-dojo-attach-point="_input" placeholder="Search" type="search"/>
+         </div>
+      </div>
+      <div class="subscriberContainer" id="subscribers">
+         <h1>Subscriber</h1>
+      </div>
+      <!-- Dojo configuration and loading -->
+      <script>
+      var dojoConfig = {
+         "async": true,
+         // This code registers the correct location of the "demo"
+         // package so we can load Dojo from the CDN whilst still
+         // being able to load local modules
+         "packages": [
+            {
+               "name": "dijit",
+               "location": "//ajax.googleapis.com/ajax/libs/dojo/1.10.3/dijit"
+            },
+            {
+               "name": "app",
+               "location": location.pathname.replace(/\/[^/]*$/, '') + "/app"
+            }
+         ]
+      };
+      </script>
+      <script src="//ajax.googleapis.com/ajax/libs/dojo/1.10.3/dojo/dojo.js"></script>
+      <!-- DEMO STARTS HERE -->
+      <script>
+         require([
+            "app/Publisher",
+            "app/Subscriber"
+         ],
+         function(Publisher, Subscriber) {
+            new Publisher({}, "publisher").startup();
+
+            var sub1 = new Subscriber();
+            sub1.placeAt("subscribers");
+            sub1.startup();
+
+            var sub2 = new Subscriber();
+            sub2.placeAt("subscribers");
+            sub2.startup();
+
+            var sub3 = new Subscriber();
+            sub3.placeAt("subscribers");
+            sub3.startup();
+
+         });
+      </script>
+   </body>
+</html>
